@@ -1,0 +1,85 @@
+<!-- made by Miguel Rodrigues @ KBZ miguel.rodrigues@knowledgebiz.pt -->
+<h1>Application Rules for {{appId}}</h1>
+<br>
+<div class="alert alert-danger" role="alert" ng-if="error">
+	<strong>{{error}}</strong>
+</div>
+
+<div class="row" ng-if="!error">
+	<div class="col-xs-12">
+		<div class="text-right">
+			<button type="button" class="btn btn-outline-primary" ng-click="redirectAppManager()">Application Manager for {{developerid}}</button>
+		</div>
+	</div>
+</div>
+<br>
+
+<div class="alert alert-success" ng-if="data" ng-if="!error">
+	<strong>{{noData}}</strong>
+</div>
+
+<table class="table" ng-if="!data" ng-if="!error">
+	<thead ng-if="!error">
+		<tr>
+			<th>RulesID</th>
+			<th>Description</th>
+			<th>Parameter</th>
+			<th>Condition Value</th>
+			<th>Control Value</th>
+			<th>Threshold (%)</th>
+			<th>NotifyType</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="r in rule">
+			<td>{{r.rulesID}}</td>
+			<td>{{r.description}}</td>
+			<td>{{r.parameter}}</td>
+			<td>{{r.conditionValue}}</td>
+			<td>{{r.controlValue}}</td>
+			<td>{{r.threshold}}</td>
+			<td>{{r.notifyType}}</td>
+			<td>
+				<button class="btn btn-primary btn-sm" ng-click="redirectStatistics(r.rulesID)">Stats</button>
+				<button class="btn btn-warning btn-sm" ng-click="redirectEditRules(r.rulesID)">Edit Rule</button>
+				<button class="btn btn-danger btn-sm" ng-click="deleterule(r.rulesID)">Delete</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br><br>
+<center><h3 ng-if="!data" ng-if="!error">More Information about the Rules</h3></center>
+<br>
+<table class="table" ng-if="!data" ng-if="!error">
+	<thead>
+		<tr>
+			<th>RulesID</th>
+			<th>Notification Type</th>
+			<th>Destinations</th>
+			<th>Hostname</th>
+			<th>Port</th>
+			<th>Path</th>
+			<th>Method</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="r in rule">
+			<td>{{r.rulesID}}</td>
+			<td>{{r.notificationType}}</td>
+			<td>{{r.emailTo}}</td>
+			<td>{{r.hostname}}</td>
+			<td>{{r.port}}</td>
+			<td>{{r.path}}</td>
+			<td>{{r.method}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="pull-center" ng-if="!error"><button class="btn btn-xs btn-success" type="button" ng-click="redirectNewRule()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>CREATE NEW RULE</button></div>
+<br><br>
+<div class="alert alert-success" ng-if="show" ng-if="!error">
+	<strong>Success!</strong> You have successfully deleted the Rule.
+</div>
+
+

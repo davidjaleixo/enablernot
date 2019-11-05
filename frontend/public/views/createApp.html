@@ -1,0 +1,43 @@
+<!-- made by Miguel Rodrigues @ KBZ miguel.rodrigues@knowledgebiz.pt -->
+<h1>Register APP {{developerid}}</h1>
+<br>
+<div class="alert alert-danger" role="alert" ng-if="error">
+	<strong>{{error}}</strong>
+</div>
+
+<div class="row" ng-if="!error">
+	<div class="col-xs-12">
+		<div class="text-right">
+			<button type="button" class="btn btn-outline-primary" ng-click="redirectAppManager()">Application Manager for {{developerid}}</button>
+		</div>
+	</div>
+</div>
+<br>
+
+<div class="alert alert-success" ng-if="data" ng-if="!error">
+	<strong>{{noData}}</strong>
+</div>
+<!-- APP REGISTRATION FORM BY DEVELOPERID -->
+<div class="container" ng-if="!error">
+	<form>
+		<div class="form-group row has-danger">
+			<label class="col-sm-2 col-form-label">AppID</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="appID" placeholder="vAppID">
+				<div ng-if="successappID == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successappID == 2"><font color="red">Fail! Input cannot be null.</font></div>
+				<small class="form-text text-muted">It´s vApp ID</small>
+			</div>
+		</div>
+		<center>
+			<button class="btn btn-primary" type="button" value="Send" ng-click="postdata(appID)">Register APP</button>
+		</center>
+	</form>
+</div>
+<br><br>
+<div class="alert alert-success" ng-if="show" ng-if="!error">
+	<strong>Success!</strong> You have successfully created the vApp.
+</div>
+<div class="alert alert-danger" ng-if="showError" ng-if="!error">
+	<strong>Error!</strong> Error to creating a vApp.
+</div>

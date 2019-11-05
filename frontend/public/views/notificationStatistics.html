@@ -1,0 +1,60 @@
+<!-- made by Miguel Rodrigues @ KBZ miguel.rodrigues@knowledgebiz.pt -->
+<h1>Statistics for {{appID}}</h1>
+<br>
+<div class="alert alert-danger" role="alert" ng-if="error">
+  <strong>{{error}}</strong>
+</div>
+
+<div class="row" ng-if="!error">
+	<div class="col-xs-12">
+		<div class="text-right">
+			<button type="button" class="btn btn-outline-primary" ng-click="redirectAppManager()">Application Manager for {{developerid}}</button>
+			<button type="button" class="btn btn-outline-primary" ng-click="redirectRuleManager()">Application Rules for {{appID}}</button>
+		</div>
+	</div>
+</div>
+<br>
+
+<div class="alert alert-success" ng-if="data" ng-if="!error">
+	<strong>{{noData}}</strong>
+</div>
+<table class="table" ng-if="!data" ng-if="!error">
+	<thead ng-if="!error">
+		<tr>
+			<th>Date</th>
+			<th>Notifications Applied by Rule (True/False)</th>
+			<th>Subject Value of Notification</th>
+			<th>Subject of Notification</th>
+			<th>RuleID</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="stat in statistics">
+			<td>{{stat.date}}</td>
+			<td>{{stat.result}}</td>
+			<td>{{stat.subjectValue}}</td>
+			<td>{{stat.subject}}</td>
+			<td>{{stat.rulesID}}</td>
+		</tr>
+	</tbody>
+</table>
+<br><br>
+<center><h3 ng-if="!data" ng-if="!error">Total Values</h3></center>
+<br>
+<table class="table" ng-if="!data" ng-if="!error">
+	<thead>
+		<tr>
+			<th>Total Notifications</th>
+			<th>Total Notifications Applied by Rule</th>
+			<th>Average Values of Total Notifications</th>
+			<th>Percentage of Total Notifications Applied by Rule with Total Notifications </th>
+		</tr>
+	</thead>
+	<tbody>
+		<td>{{totalNotifications}}</td>
+		<td>{{totalNotificationsApplyByRules}}</td>
+		<td>{{averageValue}}</td>
+		<td>{{percentage}} %</td>
+	</tbody>
+</table>
+

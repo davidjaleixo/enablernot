@@ -1,0 +1,21 @@
+{
+	"Email":{
+		"USEREMAIL": "vfos.notify@gmail.com",
+		"USERPWD": "21645FCTunl",
+		"EMAILON": "false"
+	},
+	"Database":{
+		"DBHOST": "mysqlservice",
+		"DBUSER": "root",
+		"DBPASSWORD": "root",
+		"DATABASE": "notifications",
+		"DBCONLIMIT": 100,
+		"DBDEBUG": "false"
+	},
+	"Logger":{
+		"DEBUGLEVEL": "debug"
+	},
+	"Enabler":{
+		"PORT": 5000
+	}
+}

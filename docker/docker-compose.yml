@@ -1,0 +1,23 @@
+#made by Miguel Rodrigues @ KBZ miguel.rodrigues@knowledgebiz.pt
+
+version: '3.3'
+services:
+    neenabler:
+        build: .
+        ports:
+            - "5919:5000"
+        depends_on:
+            - mysqlservice
+    mysqlservice:
+        image: mysql:5.7
+        restart: always
+        environment:
+            MYSQL_DATABASE: notifications
+            MYSQL_USER: mrodrigues
+            MYSQL_PASSWORD: rodriguesm
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+        volumes:
+            - ./dbdata:/var/lib/mysql
+            - ./DB:/docker-entrypoint-initdb.d
+            

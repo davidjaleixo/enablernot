@@ -1,0 +1,141 @@
+<!-- made by Miguel Rodrigues @ KBZ miguel.rodrigues@knowledgebiz.pt -->
+<h1>Application Rules for {{appId}}</h1>
+<br>
+<div class="alert alert-danger" role="alert" ng-if="error">
+	<strong>{{error}}</strong>
+</div>
+
+<div class="row" ng-if="!error">
+	<div class="col-xs-12">
+		<div class="text-right">
+			<button type="button" class="btn btn-outline-primary" ng-click="redirectAppManager()">Application Manager for {{developerid}}</button>
+		</div>
+	</div>
+</div>
+<br>
+
+<!-- APP RULES REGISTRATION FORM -->
+<div class="container" ng-if="!error">
+	<form>
+		<div class="form-group row has-danger">
+			<label class="col-sm-2 col-form-label">Description</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="description" placeholder="Same Description">
+				<div ng-if="successDescription == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successDescription == 2"><font color="red">Fail! Input cannot be null.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger">
+			<label class="col-sm-2 col-form-label">Parameter</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="parameter" placeholder="Which Parameter">
+				<div ng-if="successParameter == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successParameter == 2"><font color="red">Fail! Input cannot be null.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger">
+			<label class="col-sm-2 col-form-label">Condition Value</label>
+			<div class="col-sm-5">
+				<select class="form-control form-control-danger" ng-model="conditionValue" ng-init="conditionValue='<'">
+					<option value="<">Less (<)</option>
+					<option value="<=">Less or Equal (<=)</option>
+					<option value=">">Bigger (>)</option>
+					<option value=">=">Bigger or Equal (>=)</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row has-danger">
+			<label class="col-sm-2 col-form-label">Control Value</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="controlValue" placeholder="20">
+				<div ng-if="successControlValue == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successControlValue == 2"><font color="red">Fail! Input cannot be null and can only be number.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger">
+			<label class="col-sm-2 col-form-label">Threshold (Percentage Value)</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="threshold" placeholder="20">
+				<div ng-if="successThreshold == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successThreshold == 2"><font color="red">Fail! Input cannot be null and can only be number.</font></div>
+				<div ng-if="successThreshold == 3"><font color="red">Fail! Number have to be Lower then 100.</font></div>
+				<div ng-if="successThreshold == 4"><font color="red">Fail! Number have to be Higher then 100.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger">
+			<label class="col-sm-2 col-form-label">Notify Type</label>
+			<div class="col-sm-5">
+				<select class="form-control form-control-danger" ng-model="notifyType" ng-init="notifyType='Email'">
+					<option value="Email">Email</option>
+					<option value="HTTP Request">HTTP Request</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row has-danger" ng-show="notifyType == 'Email'">
+			<label class="col-sm-2 col-form-label">Emails</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="emailsTo" placeholder="All Emails">
+				<div ng-if="successEmails == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successEmails == 2"><font color="red">Fail! Input cannot be null.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger" ng-show="notifyType == 'Email'">
+			<label class="col-sm-2 col-form-label">Notification Type</label>
+			<div class="col-sm-5">
+				<select class="form-control form-control-danger" ng-model="notificationType" ng-init="notificationType='1'">
+					<option value="1" selected>End of Month (1)</option>
+					<option value="2">End of Two Weeks (2)</option>
+					<option value="3">End of Week (3)</option>
+					<option value="4">End of Three Days (4)</option>
+					<option value="5">Urgent - Immediately (5)</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row has-danger" ng-show="notifyType == 'HTTP Request'">
+			<label class="col-sm-2 col-form-label">Hostname</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="hostname" placeholder="Which Hostname">
+				<div ng-if="successHostname == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successHostname == 2"><font color="red">Fail! Input cannot be null.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger" ng-show="notifyType == 'HTTP Request'">
+			<label class="col-sm-2 col-form-label">Port</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="port" placeholder="Which Port">
+				<div ng-if="successPort == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successPort == 2"><font color="red">Fail! Input cannot be null and can only be number.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger" ng-show="notifyType == 'HTTP Request'">
+			<label class="col-sm-2 col-form-label">Path</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control form-control-danger" ng-model="path" placeholder="Which Path">
+				<div ng-if="successPath == 1"><font color="green">Success! You've done it.</font></div>
+				<div ng-if="successPath == 2"><font color="red">Fail! Input cannot be null.</font></div>
+			</div>
+		</div>
+		<div class="form-group row has-danger" ng-show="notifyType == 'HTTP Request'">
+			<label class="col-sm-2 col-form-label">Method</label>
+			<div class="col-sm-5">
+				<select class="form-control form-control-danger" ng-model="method" ng-init="method='POST'">
+					<option value="POST">POST</option>
+					<option value="GET">GET</option>
+					<option value="PUT">PUT</option>
+					<option value="DELETE">DELETE</option>
+				</select>
+			</div>
+		</div>
+		<center>
+			<button class="btn btn-primary" type="button" value="Send" ng-click="postdata(description, parameter, conditionValue, controlValue, threshold, notifyType, notificationType, hostname, port, path, method, emailsTo)" ng-if="!error">Register Rules</button>
+		</center>
+	</form>
+</div>
+
+<br><br>
+<div class="alert alert-success" ng-if="show" ng-if="!error">
+	<strong>Success!</strong> You have successfully created the Rule.
+</div>
+<div class="alert alert-danger" ng-if="showError" ng-if="!error">
+	<strong>Error!</strong> Error to creating a Rule.
+</div>

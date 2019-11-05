@@ -1,0 +1,32 @@
+#made by Miguel Rodrigues @ KBZ miguel.rodrigues@knowledgebiz.pt
+
+version: '3.3'
+services:
+    neenabler:
+        image: vfos/nenabler:latest
+        deploy:
+          restart_policy:
+            condition: any
+            delay: 5s
+        ports:
+            - "5919:5000"
+        volumes:
+            - dbinit:/usr/src/ne/DB
+    mysqlservice:
+        image: mysql:5.7
+        deploy:
+          restart_policy:
+            condition: any
+            delay: 5s
+        environment:
+            MYSQL_DATABASE: notifications
+            MYSQL_USER: mrodrigues
+            MYSQL_PASSWORD: rodriguesm
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+        volumes:
+            - dbdata:/var/lib/mysql
+            - dbinit:/docker-entrypoint-initdb.d
+volumes:
+    dbdata:
+    dbinit:
